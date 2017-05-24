@@ -106,7 +106,15 @@ public class CodePushNativeModule extends ReactContextBaseJavaModule {
 
             Method[] methods = jsBundleLoaderClass.getDeclaredMethods();
             for (Method method : methods) {
-                if (method.getName().equals("createFileLoader")) {
+                /**
+                 * Forked patch:
+                 *     calling CodePush.restartApp() crashed our app.
+                 *     quick fix, changed: createFileLoader -> createAssetLoader
+                 *
+                 * See original issue:
+                 *     https://github.com/Microsoft/react-native-code-push/issues/847
+                 */
+                if (method.getName().equals("createAssetLoader")) {
                     createFileLoaderMethod = method;
                     break;
                 }
