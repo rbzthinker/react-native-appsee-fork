@@ -1,0 +1,60 @@
+TODO-*/
+yarn.lock
+*.xcarchive/
+__attic__
+
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IJ
+#
+.idea
+*.iml
+.gradle
+local.properties
+android/android-ndk-r10e
+android/android-ndk-r10e.zip
+
+# node.js
+#
+node_modules/
+npm-debug.log
+.grunt/
+
+# tests
+#
+specBundle.js
+specRunner.html
+
+# BUCK
+buck-out/
+\.buckd/
+
+# ios/Frameworks
+ios/Frameworks/
+
+# VSCode
+.vscode/
+tsconfig.json
+typings/
