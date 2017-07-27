@@ -103,38 +103,25 @@ public class CodePushNativeModule extends ReactContextBaseJavaModule {
             Field bundleLoaderField = instanceManager.getClass().getDeclaredField("mBundleLoader");
             Class<?> jsBundleLoaderClass = Class.forName("com.facebook.react.cxxbridge.JSBundleLoader");
             Method createFileLoaderMethod = null;
+            String loader = (latestJSBundleFile.toLowerCase().startsWith("assets://")) ? "createAssetLoader" : "createFileLoader";
 
             Method[] methods = jsBundleLoaderClass.getDeclaredMethods();
             for (Method method : methods) {
-                /**
-                 * Forked patch:
-                 *     calling CodePush.restartApp() crashed our app.
-                 *     quick fix, changed: createFileLoader -> createAssetLoader
-                 *
-                 * See original issue:
-                 *     https://github.com/Microsoft/react-native-code-push/issues/847
-                 */
-                if (method.getName().equals("createAssetLoader")) {
+                if (method.getName().equals(loader)) {
                     createFileLoaderMethod = method;
                     break;
                 }
-            }
-
-            if (createFileLoaderMethod == null) {
-                throw new NoSuchMethodException("Could not find a recognized 'createFileLoader' method");
             }
 
             int numParameters = createFileLoaderMethod.getGenericParameterTypes().length;
             Object latestJSBundleLoader;
 
             if (numParameters == 1) {
-                // RN >= v0.34
                 latestJSBundleLoader = createFileLoaderMethod.invoke(jsBundleLoaderClass, latestJSBundleFile);
             } else if (numParameters == 2) {
-                // RN >= v0.31 && RN < v0.34
                 latestJSBundleLoader = createFileLoaderMethod.invoke(jsBundleLoaderClass, getReactApplicationContext(), latestJSBundleFile);
             } else {
-                throw new NoSuchMethodException("Could not find a recognized 'createFileLoader' method");
+                throw new NoSuchMethodException(String.format("Could not find a recognized '%s' method", loader));
             }
 
             bundleLoaderField.setAccessible(true);
