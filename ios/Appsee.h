@@ -1,6 +1,6 @@
 //
 //  Appsee.h
-//  Appsee v2.3.2 
+//  Appsee v2.3.4
 //
 //  Copyright (c) 2017 Shift 6 Ltd. All rights reserved.
 //
@@ -37,11 +37,6 @@
 /** Stops the current video (session tracking will continue). Usually, this method shouldn't be called unless you explictly want to stop video recording.  
  */
 +(void)stop;
-
-/** Stops the current session and uploads it immediately (in the background). Usually, this method shouldn't be called unless you explictly want 
-    to stop recording and force uploading at some point in your app, before the user minimizes it.
- */
-+(void)stopAndUpload __deprecated_msg("Please use [finishSession:NO upload:YES] instead");
 
 /**
  * Finishes the current session and uploads it (in the background). Usually, this method shouldn't be called unless you
@@ -107,6 +102,11 @@
  @param screenName The name of the screen (ie: "WelcomeScreen").
  */
 +(void)startScreen:(NSString*)screenName;
+
+/** Add a custom action to the current screen.
+ @param actionName The name of the action (ie: "MyButtonClick").
+ */
++(void)addScreenAction:(NSString*)actionName;
 
 /** Overlay an image on top of the next video frame.
  @param image The image to overlay. Can be 'nil' to stop overlaying any image.
@@ -187,25 +187,6 @@ This method should be usually called right after the start: method.
  */
 +(void)setDelegate:(id<AppseeDelegate>)delegate;
 
-/******
- OpenGL
- ******/
-
-/** Mark the starting of the render loop. This method is optional and should be called only if calling appendGLFrame: alone results in empty videos.
- This should be called right after binding a render buffer, and before drawing object onto it. After drawing the objects, call presentRenderBuffer:.
- */
-+(void)startRenderLoop;
-
-/*! The following methods append the OpenGL render buffer to the video. Should be called right before calling 'presentRenderbuffer:'.
- * If you have more than one render buffer, bind it first using glBindRenderbuffer.
- * @param glView The UIView on which the OpenGL scene is presented.
- * @param includeUIKitElements This parameter states whether UIKit elements should be included in the output.
- */
-+(void)appendGLFrame:(UIView *)glView;
-+(void)appendGLFrame:(UIView *)glView includeUIKitElements:(BOOL)includeUIKit;
-
-+(void)appendGLFrameUnity:(UIView *)glView;
-+(void)appendGLFrameUnity:(UIView *)glView includeUIKitElements:(BOOL)includeUIKit;
 
 @end
 
@@ -231,18 +212,3 @@ This method should be usually called right after the start: method.
 -(NSString *)appseeScreenDetected:(NSString *)screenName;
 
 @end
-
-
-/*****************************************
-NSNotificationCenter Consts - Deprecated
-******************************************/
-
-// Notification Types
-extern NSString *const AppseeSessionStartedNotification __deprecated_msg("Appsee's NSNotificationCenter messages are deprecated. Please use AppseeDelegate for receiving notifications");
-extern NSString *const AppseeSessionEndedNotification   __deprecated_msg("Appsee's NSNotificationCenter messages are deprecated. Please use AppseeDelegate for receiving notifications");
-extern NSString *const AppseeScreenDetectedNotification __deprecated_msg("Appsee's NSNotificationCenter messages are deprecated. Please use AppseeDelegate for receiving notifications");
-
-// UserInfo Keys
-extern NSString *const kAppseeSessionId                 __deprecated_msg("Appsee's NSNotificationCenter messages are deprecated. Please use AppseeDelegate for receiving notifications");
-extern NSString *const kAppseeIsVideoRecorded           __deprecated_msg("Appsee's NSNotificationCenter messages are deprecated. Please use AppseeDelegate for receiving notifications");
-extern NSString *const kAppseeScreenName                __deprecated_msg("Appsee's NSNotificationCenter messages are deprecated. Please use AppseeDelegate for receiving notifications");

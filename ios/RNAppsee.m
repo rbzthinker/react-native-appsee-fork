@@ -1,15 +1,49 @@
 #import "RNAppsee.h"
 #import "Appsee.h"
+#import <objc/runtime.h>
+#import <RCTTouchHandler.h>
 
 @implementation RNAppsee
+
 @synthesize bridge = _bridge;
+
+static BOOL (*_origCanBePreventedByGestureRecognizer)(id, SEL, UIGestureRecognizer*);
+static NSSet *appseeGesturePreventingRecognizersClasses;
+
+// Replace RN canBePreventedByGestureRecognizer to return NO in case the prevented recognizer is Appsee's.
+// Using shouldRecognizeSimultaneouslyWithGestureRecognizer doesn't work since React's recognizer is still being prevented.
+static BOOL uvCanBePreventedByGestureRecognizer(UIApplication* self, SEL _cmd, UIGestureRecognizer* preventingGestureRecognizer)
+{
+    if ([appseeGesturePreventingRecognizersClasses containsObject:NSStringFromClass([preventingGestureRecognizer class])])
+    {
+        return NO;
+    }
+    
+    return _origCanBePreventedByGestureRecognizer(self, _cmd, preventingGestureRecognizer);
+}
+
 
 RCT_EXPORT_MODULE(Appsee)
 
 RCT_EXPORT_METHOD(start: (NSString *) apiKey){
     dispatch_async(dispatch_get_main_queue(), ^{
-      [Appsee performSelector:@selector(appendSDKType:) withObject:@"rn"];
-      [Appsee start: apiKey];
+        appseeGesturePreventingRecognizersClasses = [NSSet setWithObjects:@"UVSwipeGestureRecognizer",
+                                                     @"UVRotationGestureRecognizer",
+                                                     @"UVTapGestureRecognizer",
+                                                     @"UVPinchGestureRecognizer",
+                                                     @"UVLongPressGestureRecognizer", nil];
+        
+        // Replace RN canBePreventedByGestureRecognizer if exist
+        #pragma GCC diagnostic ignored "-Wundeclared-selector"
+        if ([[RCTTouchHandler class] instancesRespondToSelector:@selector(canBePreventedByGestureRecognizer:)])
+        {
+            Method originalMethod = class_getInstanceMethod([RCTTouchHandler class], @selector(canBePreventedByGestureRecognizer:));
+            _origCanBePreventedByGestureRecognizer = (BOOL ( *)(id, SEL, UIGestureRecognizer *)) method_setImplementation(originalMethod, (IMP)uvCanBePreventedByGestureRecognizer);
+        }
+        
+        [Appsee performSelector:@selector(appendSDKType:) withObject:@"rn"];
+        [Appsee start: apiKey];
+        
     });
 }
 
@@ -43,6 +77,10 @@ RCT_EXPORT_METHOD(addEvent: (NSString *) eventName withProperties: (NSDictionary
 
 RCT_EXPORT_METHOD(startScreen: (NSString *) screenName){
     [Appsee startScreen: screenName];
+}
+
+RCT_EXPORT_METHOD(addScreenAction: (NSString *) actionName){
+    [Appsee addScreenAction: actionName];
 }
 
 RCT_EXPORT_METHOD(setUserId: (NSString *) userID){

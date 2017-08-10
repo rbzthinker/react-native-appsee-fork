@@ -198,6 +198,11 @@ public class AppseeReactPackage implements ReactPackage {
         }
 
         @ReactMethod
+        public void addScreenAction(String actionName) {
+            Appsee.addScreenAction(actionName);
+        }
+
+        @ReactMethod
         public void setOptOutStatus(boolean status) {
             Appsee.setOptOutStatus(status);
         }

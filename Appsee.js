@@ -134,6 +134,13 @@ class Appsee {
         
         AppseeBridge.set3rdPartyID(externalID, systemName, isPersistent);
     }
-
+    
+    static addScreenAction(actionName) {
+        if (!actionName) {
+            console.log('appsee : addScreenAction params are invalid');
+            return;
+        }
+        AppseeBridge.addScreenAction(actionName);
+    }
 }
 module.exports = Appsee;

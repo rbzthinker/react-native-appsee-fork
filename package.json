@@ -1,8 +1,61 @@
 {
+  "_args": [
+    [
+      {
+        "raw": "react-native-appsee",
+        "scope": null,
+        "escapedName": "react-native-appsee",
+        "name": "react-native-appsee",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/testaccount/Dev/temp"
+    ]
+  ],
+  "_from": "react-native-appsee@latest",
+  "_id": "react-native-appsee@2.3.42",
+  "_inCache": true,
+  "_location": "/react-native-appsee",
+  "_nodeVersion": "6.4.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/react-native-appsee-2.3.42.tgz_1502277422672_0.7117854850366712"
+  },
+  "_npmUser": {
+    "name": "appsee",
+    "email": "yoni@appsee.com"
+  },
+  "_npmVersion": "4.1.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-appsee",
+    "scope": null,
+    "escapedName": "react-native-appsee",
+    "name": "react-native-appsee",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-appsee/-/react-native-appsee-2.3.42.tgz",
+  "_shasum": "d133ef0a0b50ba11249baef7d0221a94a6ffd9f2",
+  "_shrinkwrap": null,
+  "_spec": "react-native-appsee",
+  "_where": "/Users/testaccount/Dev/temp",
   "author": {
     "name": "Shift 6 LTD"
   },
+  "dependencies": {},
   "description": "Appsee React Native Bridge",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "d133ef0a0b50ba11249baef7d0221a94a6ffd9f2",
+    "tarball": "https://registry.npmjs.org/react-native-appsee/-/react-native-appsee-2.3.42.tgz"
+  },
   "homepage": "http://www.appsee.com",
   "keywords": [
     "react",
@@ -23,7 +76,15 @@
   ],
   "license": "Copyright (c) 2013, Shift 6 LTD. Appsee\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n    * Redistributions of source code must retain the above copyright\n      notice, this list of conditions and the following disclaimer.\n    * Neither the name of Shift 6 Ltd, Appsee nor the names of its\n      contributors may be used to endorse or promote products derived from this\n      software without specific prior written permission.\nTHE SERVICE, THE SITE, THE APPSEE SDK, THE REPORTS AND/OR THE CONTENT ARE ALL PROVIDED ON AN \"AS IS\" BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, RELIABILITY AND/OR QUALITY OF SERVICE, WARRANTIES OF TITLE OR NON-INFRINGEMENT OR IMPLIED WARRANTIES OF USE, MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR USE.",
   "main": "index.js",
+  "maintainers": [
+    {
+      "name": "appsee",
+      "email": "yoni@appsee.com"
+    }
+  ],
   "name": "react-native-appsee",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
   "rnpm": {
     "ios": {
       "sharedLibraries": [
@@ -34,55 +95,6 @@
       "packageInstance": "new AppseeReactPackage()"
     }
   },
-  "version": "2.3.23",
-  "react-native": {
-    "zlib": "browserify-zlib",
-    "console": "console-browserify",
-    "constants": "constants-browserify",
-    "crypto": "react-native-crypto",
-    "dns": "dns.js",
-    "net": "react-native-tcp",
-    "domain": "domain-browser",
-    "http": "react-native-http",
-    "https": "https-browserify",
-    "os": "os-browserify",
-    "path": "path-browserify",
-    "querystring": "querystring-es3",
-    "fs": "react-native-level-fs",
-    "_stream_transform": "readable-stream/transform",
-    "_stream_readable": "readable-stream/readable",
-    "_stream_writable": "readable-stream/writable",
-    "_stream_duplex": "readable-stream/duplex",
-    "_stream_passthrough": "readable-stream/passthrough",
-    "dgram": "react-native-udp",
-    "stream": "stream-browserify",
-    "timers": "timers-browserify",
-    "tty": "tty-browserify",
-    "vm": "vm-browserify"
-  },
-  "browser": {
-    "zlib": "browserify-zlib",
-    "console": "console-browserify",
-    "constants": "constants-browserify",
-    "crypto": "react-native-crypto",
-    "dns": "dns.js",
-    "net": "react-native-tcp",
-    "domain": "domain-browser",
-    "http": "react-native-http",
-    "https": "https-browserify",
-    "os": "os-browserify",
-    "path": "path-browserify",
-    "querystring": "querystring-es3",
-    "fs": "react-native-level-fs",
-    "_stream_transform": "readable-stream/transform",
-    "_stream_readable": "readable-stream/readable",
-    "_stream_writable": "readable-stream/writable",
-    "_stream_duplex": "readable-stream/duplex",
-    "_stream_passthrough": "readable-stream/passthrough",
-    "dgram": "react-native-udp",
-    "stream": "stream-browserify",
-    "timers": "timers-browserify",
-    "tty": "tty-browserify",
-    "vm": "vm-browserify"
-  }
+  "scripts": {},
+  "version": "2.3.42"
 }
