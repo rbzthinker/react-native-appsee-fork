@@ -9,6 +9,7 @@
 
 static BOOL (*_origCanBePreventedByGestureRecognizer)(id, SEL, UIGestureRecognizer*);
 static NSSet *appseeGesturePreventingRecognizersClasses;
+static dispatch_once_t onceToken;
 
 // Replace RN canBePreventedByGestureRecognizer to return NO in case the prevented recognizer is Appsee's.
 // Using shouldRecognizeSimultaneouslyWithGestureRecognizer doesn't work since React's recognizer is still being prevented.
@@ -22,11 +23,8 @@ static BOOL uvCanBePreventedByGestureRecognizer(UIApplication* self, SEL _cmd, U
     return _origCanBePreventedByGestureRecognizer(self, _cmd, preventingGestureRecognizer);
 }
 
-
-RCT_EXPORT_MODULE(Appsee)
-
-RCT_EXPORT_METHOD(start: (NSString *) apiKey){
-    dispatch_async(dispatch_get_main_queue(), ^{
+static void overrideReactNativeMethods(){
+    dispatch_once(&onceToken, ^{
         appseeGesturePreventingRecognizersClasses = [NSSet setWithObjects:@"UVSwipeGestureRecognizer",
                                                      @"UVRotationGestureRecognizer",
                                                      @"UVTapGestureRecognizer",
@@ -40,7 +38,14 @@ RCT_EXPORT_METHOD(start: (NSString *) apiKey){
             Method originalMethod = class_getInstanceMethod([RCTTouchHandler class], @selector(canBePreventedByGestureRecognizer:));
             _origCanBePreventedByGestureRecognizer = (BOOL ( *)(id, SEL, UIGestureRecognizer *)) method_setImplementation(originalMethod, (IMP)uvCanBePreventedByGestureRecognizer);
         }
-        
+    });
+}
+
+RCT_EXPORT_MODULE(Appsee)
+
+RCT_EXPORT_METHOD(start: (NSString *) apiKey){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        overrideReactNativeMethods();
         [Appsee performSelector:@selector(appendSDKType:) withObject:@"rn"];
         [Appsee start: apiKey];
         

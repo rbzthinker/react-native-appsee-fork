@@ -14,19 +14,19 @@
     ]
   ],
   "_from": "react-native-appsee@latest",
-  "_id": "react-native-appsee@2.3.42",
+  "_id": "react-native-appsee@2.3.43",
   "_inCache": true,
   "_location": "/react-native-appsee",
-  "_nodeVersion": "6.4.0",
+  "_nodeVersion": "6.10.0",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/react-native-appsee-2.3.42.tgz_1502277422672_0.7117854850366712"
+    "tmp": "tmp/react-native-appsee-2.3.43.tgz_1502621902992_0.9218881854321808"
   },
   "_npmUser": {
     "name": "appsee",
     "email": "yoni@appsee.com"
   },
-  "_npmVersion": "4.1.1",
+  "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
     "raw": "react-native-appsee",
@@ -40,8 +40,8 @@
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "https://registry.npmjs.org/react-native-appsee/-/react-native-appsee-2.3.42.tgz",
-  "_shasum": "d133ef0a0b50ba11249baef7d0221a94a6ffd9f2",
+  "_resolved": "https://registry.npmjs.org/react-native-appsee/-/react-native-appsee-2.3.43.tgz",
+  "_shasum": "1741d6a3944bbd1f3e8df45f4555947ff0d5815a",
   "_shrinkwrap": null,
   "_spec": "react-native-appsee",
   "_where": "/Users/testaccount/Dev/temp",
@@ -53,9 +53,10 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "d133ef0a0b50ba11249baef7d0221a94a6ffd9f2",
-    "tarball": "https://registry.npmjs.org/react-native-appsee/-/react-native-appsee-2.3.42.tgz"
+    "shasum": "1741d6a3944bbd1f3e8df45f4555947ff0d5815a",
+    "tarball": "https://registry.npmjs.org/react-native-appsee/-/react-native-appsee-2.3.43.tgz"
   },
+  "gitHead": "49fdd06894825602ef1498562ed4a532a426941a",
   "homepage": "http://www.appsee.com",
   "keywords": [
     "react",
@@ -96,5 +97,5 @@
     }
   },
   "scripts": {},
-  "version": "2.3.42"
+  "version": "2.3.43"
 }
